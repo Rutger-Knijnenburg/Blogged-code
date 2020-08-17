@@ -18,15 +18,15 @@ try{
 	$destinationTenant = Connect-Tenant -Domain $newTenantUrl -Credential $credentialsNewTenant
 
 	$migrationSiteConnection = Connect-PnPOnline -Url $migrationSiteUrl -Credentials $credentialsMigrationTenant
-	$migrationItem = Set-PnPListmigrationItem -List $migrationListName -Identity $id -Connection $migrationSiteConnection -Values @{"Status"="Started";}
+	$migrationItem = Set-PnPListItem -List $migrationListName -Identity $id -Connection $migrationSiteConnection -Values @{"Status"="Started";}
 
 	Copy-Team -Team $team -DestinationTenant $destinationTenant
 
-	$migrationItem = Set-PnPListmigrationItem -List $migrationListName -Identity $id -Connection $migrationSiteConnection -Values @{"Status"="Finished";}
+	$migrationItem = Set-PnPListItem -List $migrationListName -Identity $id -Connection $migrationSiteConnection -Values @{"Status"="Finished";}
 	Stop-Transcript
 }
 Catch{
 	
-	$migrationItem = Set-PnPListmigrationItem -List $migrationListName -Identity $id -Connection $migrationSiteConnection -Values @{"Status"="Error";}
+	$migrationItem = Set-PnPListItem -List $migrationListName -Identity $id -Connection $migrationSiteConnection -Values @{"Status"="Error";}
 	Stop-Transcript
 }
