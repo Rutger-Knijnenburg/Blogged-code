@@ -21,7 +21,7 @@ else{
 
     $camlQuery= "Your <camlQuery> to get the right items from the migration list (e.g: newly added items, finished items, items with errors etc)"
 
-    $migrationItems = Get-PnPmigrationItem -List $migrationListName -Connection $migrationSiteConnection -Query $camlQuery | Select-Object -first $maxRunningTasks
+    $migrationItems = Get-PnPListItem -List $migrationListName -Connection $migrationSiteConnection -Query $camlQuery | Select-Object -first $maxRunningTasks
 
     if($migrationItems.count -gt 0) {
         foreach($migrationItem in $migrationItems)
